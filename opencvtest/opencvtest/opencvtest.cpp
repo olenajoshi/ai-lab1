@@ -1,6 +1,3 @@
-// opencvtest.cpp : Defines the entry point for the console application.
-//
-
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_core243d.lib")
 #pragma comment(lib, "opencv_features2d243d.lib")
@@ -17,15 +14,21 @@
 #include <cv.h>
 #include <highgui.h>
 
-
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, char** argv)
 {
-	IplImage* img = cvLoadImage("C:\\Users\\olenajoshi\\Desktop\\ai-lab-1\\1.png");
-	cvNamedWindow("example1", CV_WINDOW_AUTOSIZE);
-	cvShowImage("example1", img);
-	cvWaitKey(0);
-	cvReleaseImage(&img);
-	cvDestroyWindow("example1");
-	return 0;
+ Mat image = imread("C:\\Users\\olenajoshi\\Desktop\\ai-lab-1\\1.png");
+ if (image.empty())
+ {
+  cout << "Could not open or find the image" << endl;
+  cin.get();
+  return -1;
+ }
+
+ String windowName = "Image";
+ namedWindow(windowName);
+ imshow(windowName, image);
+ waitKey(0);
+ destroyWindow(windowName);
+ return 0;
 }
 
